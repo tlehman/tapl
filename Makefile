@@ -1,0 +1,2 @@
+all:
+	rustc arith.rs

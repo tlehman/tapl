@@ -25,4 +25,33 @@ The rules for constructing compound terms are:
 
 
 # Chapter 4
-In chapter 4, the author gives a concrete implementation of the `arith` language.
+In chapter 4, the author gives a concrete implementation of the `arith` language in OCaml. I am reading this book for two reasons, 1. to learn more about type systems in general, and 2. to learn Rust specifically by exploring its type system.
+
+The author gives this OCaml type definition:
+``` ocaml
+type term = 
+  TmTrue of info
+| TmFalse of info
+| TmIf of info * term * term * term
+| TmZero of info
+| TmSucc of info * term
+| TmPred of info * term
+| TmIsZero of info * term
+```
+Which I tried converting into Rust using this `enum`:
+
+``` rust
+#[derive(Debug)]  // equivalent to OCaml's "of info" annotation
+enum Term {
+  TmTrue,
+  TmFalse,
+  TmIf(Term, Term, Term),
+  TmZero,
+  TmSucc(Term),
+  TmPred(Term),
+  TmIsZero(Term)
+}
+```
+
+Then when I compiled it, I got this _extremely_ helpful error message with an explainer page telling me that in order for the recursive type `Term` to compile, I need to use `&Term` with an explicit [lifetime](https://doc.rust-lang.org/1.9.0/book/lifetimes.html) or use a `Box<Term>` type, which represents a pointer to an object on the heap.
+
