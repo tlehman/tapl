@@ -55,3 +55,20 @@ enum Term {
 
 Then when I compiled it, I got this _extremely_ helpful error message with an explainer page telling me that in order for the recursive type `Term` to compile, I need to use `&Term` with an explicit [lifetime](https://doc.rust-lang.org/1.9.0/book/lifetimes.html) or use a `Box<Term>` type, which represents a pointer to an object on the heap.
 
+
+# Chapter 5 the untyped lambda-calculus
+
+The λ-calculus was ~~invented~~ discovered by Alonzo Church in the 1920s, about 100 years ago as I write this.
+
+It is important because it is both a language in which computation can be described, and a mathematical object about which rigorous theorems can be proven.
+
+The grammar of terms in the untyped λ-calculus is given below:
+
+```
+t ::= 
+  x
+  λx.t
+  t t
+```
+
+The `x` are **terms**, the `λx.t` are **abstractions** and the `t t` are **applications**.
