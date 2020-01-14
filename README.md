@@ -72,3 +72,41 @@ t ::=
 ```
 
 The `x` are **terms**, the `λx.t` are **abstractions** and the `t t` are **applications**.
+
+## Call-by-value semantics
+
+A redex (reducible expression) is term that can be &beta;-reduced all the way to a value.
+
+Call by value works by evaluating the input before applying the outermost function.
+
+## Church booleans
+
+The values `true` and `false` can be encoded as functions in the λ-calculus:
+
+```
+tru = λt.λf.t
+fls = λt.λf.f
+```
+
+What is interesting about these two values is that they are conditional functions, observe what happens when we apply `tru` to `fls` and `tru`
+
+```
+(tru fls) tru
+= (λt.λf.t) fls tru
+-> (λf.fls) tru
+-> fls
+```
+
+This is like saying `if tru then fls else tru`.
+
+## Church numerals
+
+Natural numbers can be represented using nested applications of the `s` function (short for 'successor').
+
+```
+c₀ = λs.λz.z
+c₁ = λs.λz.s z
+c₂ = λs.λz.s (s z)
+c₃ = λs.λz.s (s (s z))
+```
+
