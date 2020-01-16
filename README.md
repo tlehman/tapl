@@ -110,3 +110,5 @@ c₂ = λs.λz.s (s z)
 c₃ = λs.λz.s (s (s z))
 ```
 
+Challenge: given two Church numerals `c` and `d`, how to define `mod c d`?
+
